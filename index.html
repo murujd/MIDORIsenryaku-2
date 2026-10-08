@@ -11,32 +11,6 @@
   無料のCloudinaryアカウント（写真・動画の保存用）が必要です。どちらもクレジットカードの登録は不要です。
 
   【Supabase（データベース）の手順】
-   1. https://supabase.com/ で無料アカウント・新しいプロジェクトを作成する
-   2. 左メニューの「SQL Editor」で、次のSQLを実行してテーブルを作る：
-
-      create table kv_store (
-        key text primary key,
-        value jsonb
-      );
-      alter table kv_store enable row level security;
-
-      -- 閲覧（読み取り）は登録なしでも誰でもできるようにする
-      create policy "kv anyone can read" on kv_store
-        for select using (true);
-
-      -- 書き込み（投稿・いいね・広告の掲載など）は、ログインしている人だけができるようにする
-      -- （ここが空欄だと、ログインしていない見知らぬ人でも書き換えができてしまいます）
-      create policy "kv only logged in can write" on kv_store
-        for insert with check (auth.role() = 'authenticated');
-      create policy "kv only logged in can update" on kv_store
-        for update using (auth.role() = 'authenticated') with check (auth.role() = 'authenticated');
-
-      ※ これにより、少なくとも「ログイン（会員登録）していない人」からの書き換えは防げます。
-      ※ ただし、この掲示板はデータをまとめて1行に保存する簡易な作りのため、
-        「ログイン済みの誰か」が投稿を消したり書き換えたりすること自体は、
-        アプリの画面（削除ボタンの出し分けなど）では防いでいますが、データベースの
-        ルールだけでは完全には防げません。より厳密に守りたい場合は、投稿を1件ずつ
-        別々の行として保存する作りに変更する必要があります（ご希望であれば対応します）。
 
    3. 左メニューの「Project Settings」→「API」を開き、
       「Project URL」と「anon public」キー（publishable key）を、下の設定欄にコピーする
