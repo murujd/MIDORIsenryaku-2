@@ -743,7 +743,7 @@
   function initBackend(){
     try{
       const cfg = window.SAKAI_SUPABASE_CONFIG;
-      if(!cfg || !cfg.url || !cfg.key || cfg.key==='YOUR_ANON_PUBLIC_KEY') return false;
+      if(!cfg || !cfg.url || !cfg.key || cfg.key==='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtYmF1Ym1obnVnb3huYnFzcXhvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzNzE0NjYsImV4cCI6MjEwNjk0NzQ2Nn0.wK-4OKFnl2v71G1B7oL-y-H5UA15rcjl5TPXhZ9SPLQ') return false;
       if(typeof supabase === 'undefined') return false;
       sbClient = supabase.createClient(cfg.url, cfg.key);
       return true;
