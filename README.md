@@ -1,1 +1,0 @@
-# MIDORIsenryaku-2
